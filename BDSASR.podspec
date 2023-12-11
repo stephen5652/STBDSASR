@@ -14,10 +14,10 @@ Pod::Spec.new do |spec|
   spec.source = { :git => "https://github.com/stephen5652/STBDSASR.git", :tag => spec.version.to_s }
   
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #  spec.source_files = 'BDSASR_lib/ASR_iOS_v33.0.11.0.84e4d91_20230523143352/{Public,Private}/**/*.{h,m,mm,c,cpp,swift}'
-  # spec.exclude_files = "BDSASR/Exclude" #排除文件
+   spec.source_files = 'BDSASR_lib/**/*.{h,m,mm,c,cpp,swift}'
+  spec.exclude_files = "BDSASR_lib/**/**/BDSClientSample/**/*" #排除文件
   
-  #  spec.project_header_files = 'BDSASR/Private/**/*.{h}'
+#   spec.project_header_files = 'BDSASR_lib/Private/**/*.{h}'
   spec.public_header_files = 'BDSASR_lib/**/*.h' #此处放置组件的对外暴漏的头文件
   
   # ――― binary framework/lib ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -45,7 +45,6 @@ Pod::Spec.new do |spec|
   
   # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   
-  
   # 其他依赖pod
   # spec.dependency "XXXXXXXX"
   
@@ -59,8 +58,11 @@ Pod::Spec.new do |spec|
   #     end
   
   spec.prepare_command  =  <<-CMD
-  tr -d '\r' < ./shell/install_pod.sh > ./shell/install_pod_fixed.sh
-  chmod +x ./shell/install_pod_fixed.sh
-  ./shell/install_pod_fixed.sh
+  rm -rf BDSASR_lib
+  mkdir BDSASR_lib
+  cat part.tar.gz* > BDSASR.tar.gz;
+  tar -xzvf BDSASR.tar.gz -C  BDSASR_lib/
+  rm -rf
+
   CMD
 end

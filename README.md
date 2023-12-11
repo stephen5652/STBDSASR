@@ -29,7 +29,11 @@ STBDSASR 组件主要用于：
 
 ### 集成
 
+```ruby
+source 'https://github.com/stephen5652/StPodSpecs.git'
+
 pod 'BDSASR', '~> 3.0.11.0'
+```
 
 ## 调用
 
