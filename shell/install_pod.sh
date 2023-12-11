@@ -1,10 +1,13 @@
-#!/usr/bin/env bash
+export LANG="en_US.UTF-8"
+export LANG="zh-CN.UTF-8"
 
-file_path=$0
-cd $(dirname ${file_path})
+# 获取当前脚本所在的路径
+current_script_path=$(dirname "$(readlink -f "$BASH_SOURCE")")
+
+echo "当前脚本路径：${current_script_path}"
 
 cur_path=$(pwd)
-pod_path=$(cd .. && pwd)
+pod_path=$(cd ${current_script_path}/.. && pwd)
 
 url_source="https://ai.baidu.com/download?sdkId=32"
 
@@ -14,6 +17,7 @@ dest_dir_name="BDSASR_lib"
 
 echo "cur_path: ${cur_path}"
 echo "pod_path: ${pod_path}"
+cd pod_path
 
 if [[ -f ${zip_file} ]]; then
 	echo -e "\nWarning: ${zip_file} has existed, we remove it first\n"
@@ -55,10 +59,7 @@ fi
 
 cd ${cur_path}
 
-dest_dir_path=$(
-	cd ../
-	pwd
-)/${dest_dir_name}
+dest_dir_path=${pod_path}/${dest_dir_name}
 
 if [[ -d ${dest_dir_path} ]]; then
 	rm -rf -- "${dest_dir_path}"

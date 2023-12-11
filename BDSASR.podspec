@@ -6,12 +6,12 @@ Pod::Spec.new do |spec|
   BDSASR 百度语音SDK的pod版本.
   DESC
   
-  spec.homepage         = 'http://github.com/stephenchen/BDSASR'
+  spec.homepage         = 'https://github.com/stephen5652/STBDSASR.git'
   spec.license      = { :type => "MIT", :file => "LICENSE" }
   spec.author             = { "stephenchen" => "stephen5652@126.com" }
-  spec.ios.deployment_target = '10.0'
+  spec.ios.deployment_target = '9.0'
   
-  spec.source = { :http => "https://github.com/stephen5652/STBDSASR.git"， :tag => spec.version.to_s }
+  spec.source = { :git => "https://github.com/stephen5652/STBDSASR.git", :tag => spec.version.to_s }
   
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #  spec.source_files = 'BDSASR_lib/ASR_iOS_v33.0.11.0.84e4d91_20230523143352/{Public,Private}/**/*.{h,m,mm,c,cpp,swift}'
@@ -58,10 +58,9 @@ Pod::Spec.new do |spec|
   #       ss.vendored_frameworks = 'YKHawkeye/Framework/*.framework'
   #     end
   
-  spec.prepare_command  =  '''
-  chmod +x ./shell/install_pod.sh
-  
-  ./shell/install_pod.sh
-  '''
-  
+  spec.prepare_command  =  <<-CMD
+  tr -d '\r' < ./shell/install_pod.sh > ./shell/install_pod_fixed.sh
+  chmod +x ./shell/install_pod_fixed.sh
+  ./shell/install_pod_fixed.sh
+  CMD
 end
